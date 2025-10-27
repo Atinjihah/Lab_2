@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Conference Registration — Task 2</title>
+  <style>
+    /* Simple, clean styling for easy copy-paste */
+    :root { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    body { margin: 24px; background:#f7f8fb; color:#111; }
+    .container { max-width:760px; margin:0 auto; background:#fff; padding:24px; border-radius:10px; box-shadow:0 6px 18px rgba(20,20,40,0.06); }
+    h1 { margin:0 0 12px 0; font-size:1.4rem; }
+    p.lead { margin:0 0 18px 0; color:#444; }
+    form { display:grid; gap:14px; }
+    .row { display:flex; gap:12px; }
+    .col { flex:1; min-width:0; }
+    label { display:block; font-size:0.86rem; margin-bottom:6px; color:#222; }
+    input[type="text"], input[type="email"], input[type="number"], select, textarea {
+      width:100%; padding:10px 12px; border:1px solid #d7dbe6; border-radius:8px; font-size:0.95rem;
+      background:#fff;
+    }
+    textarea { min-height:100px; resize:vertical; }
+    .small { font-size:0.85rem; color:#666; margin-top:4px; }
+    .checkbox-inline { display:flex; gap:8px; align-items:center; }
+    .actions { display:flex; gap:10px; margin-top:6px; }
+    button { padding:10px 16px; border-radius:8px; border:0; cursor:pointer; font-weight:600; }
+    button[type="submit"] { background:#0b76ef; color:#fff; }
+    button[type="reset"] { background:#eef2fb; color:#0b76ef; border:1px solid #d6e4ff; }
+    .required { color:#d00; margin-left:6px; font-weight:600; }
+    .note { font-size:0.85rem; color:#666; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Conference Registration Form</h1>
+    <p class="lead">Please complete the form below to register for the conference. Fields marked with <span class="required">*</span> are required.</p>
+
+    <form id="regForm" action="#" method="post" novalidate>
+      <!-- Full name (required) -->
+      <div>
+        <label for="fullname">Full Name <span class="required">*</span></label>
+        <input id="fullname" name="fullname" type="text" placeholder="e.g. Nur Aisyah Binti Ahmad" required />
+        <div class="small">Enter your full name as you want it on the certificate.</div>
+      </div>
+
+      <!-- Email (required) -->
+      <div>
+        <label for="email">Email Address <span class="required">*</span></label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        <div class="small">We will send confirmation to this address.</div>
+      </div>
+
+      <!-- Age (required, min 18 max 99) -->
+      <div class="row">
+        <div class="col">
+          <label for="age">Age <span class="required">*</span></label>
+          <input id="age" name="age" type="number" min="18" max="99" placeholder="18" required />
+          <div class="small">Minimum age: 18. Maximum age: 99.</div>
+        </div>
+
+        <div class="col">
+          <label for="phone">Mobile Phone</label>
+          <input id="phone" name="phone" type="text" placeholder="+60 12-345 6789" />
+        </div>
+      </div>
+
+      <!-- Organization / Job -->
+      <div class="row">
+        <div class="col">
+          <label for="org">Organization / Institution</label>
+          <input id="org" name="organization" type="text" placeholder="e.g. Universiti Tun Hussein Onn Malaysia" />
+        </div>
+        <div class="col">
+          <label for="job">Job Title / Course</label>
+          <input id="job" name="jobtitle" type="text" placeholder="e.g. Student / Lecturer" />
+        </div>
+      </div>
+
+      <!-- Sessions -->
+      <div>
+        <label for="session">Preferred Conference Track</label>
+        <select id="session" name="session">
+          <option value="">-- Select a track --</option>
+          <option value="ai">AI & Machine Learning</option>
+          <option value="web">Web Technologies</option>
+          <option value="hci">Human-Computer Interaction</option>
+          <option value="security">Cyber Security</option>
+        </select>
+      </div>
+
+      <!-- Workshops (checkboxes) -->
+      <div>
+        <label>Workshops (choose any)</label>
+        <div class="row" style="flex-wrap:wrap;">
+          <label class="checkbox-inline"><input type="checkbox" name="workshops" value="ws1" /> Hands-on: React</label>
+          <label class="checkbox-inline"><input type="checkbox" name="workshops" value="ws2" /> Data Science with Python</label>
+          <label class="checkbox-inline"><input type="checkbox" name="workshops" value="ws3" /> UX Research Methods</label>
+        </div>
+      </div>
+
+      <!-- Dietary -->
+      <div>
+        <label for="diet">Dietary Requirements</label>
+        <input id="diet" name="diet" type="text" placeholder="e.g. Vegetarian / No pork / None" />
+      </div>
+
+      <!-- T-shirt size -->
+      <div>
+        <label for="size">T-shirt Size</label>
+        <select id="size" name="tshirt">
+          <option value="">-- Select size --</option>
+          <option>XS</option>
+          <option>S</option>
+          <option>M</option>
+          <option>L</option>
+          <option>XL</option>
+        </select>
+      </div>
+
+      <!-- Notes -->
+      <div>
+        <label for="notes">Additional Notes</label>
+        <textarea id="notes" name="notes" placeholder="Any other information we should know..."></textarea>
+      </div>
+
+      <!-- Agreement checkbox (example) -->
+      <div>
+        <label class="checkbox-inline">
+          <input id="agree" name="agree" type="checkbox" required />
+          I confirm the information above is correct. <span class="required">*</span>
+        </label>
+        <div class="small">You must check this box to submit the form.</div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button type="submit">Register</button>
+        <button type="reset">Reset</button>
+      </div>
+
+      <p class="note">After submission you would normally be redirected to a confirmation page. In this example the form action is <code>#</code> so nothing will be sent to a server.</p>
+    </form>
+  </div>
+
+  <script>
+    // Basic client-side validation improvements for Age (clamp & custom message)
+    (function () {
+      const form = document.getElementById('regForm');
+      const age = document.getElementById('age');
+
+      // Clamp numeric age input on input
+      age.addEventListener('input', function () {
+        const min = parseInt(age.min, 10);
+        const max = parseInt(age.max, 10);
+        const val = age.value === '' ? '' : Number(age.value);
+        if (val !== '' && !Number.isNaN(val)) {
+          if (val < min) age.value = min;
+          if (val > max) age.value = max;
+        }
+        // clear previous custom validity when user edits
+        age.setCustomValidity('');
+      });
+
+      // On form submit, set friendly messages if invalid
+      form.addEventListener('submit', function (e) {
+        // Reset custom validity messages
+        age.setCustomValidity('');
+
+        if (!age.checkValidity()) {
+          if (age.validity.valueMissing) {
+            age.setCustomValidity('Please enter your age (18–99).');
+          } else if (age.validity.rangeUnderflow) {
+            age.setCustomValidity('You must be at least 18 years old to register.');
+          } else if (age.validity.rangeOverflow) {
+            age.setCustomValidity('Please enter an age less than or equal to 99.');
+          }
+          // Let the browser show the message and prevent submit
+          age.reportValidity();
+          e.preventDefault();
+          return;
+        }
+
+        // Example: prevent actual submission since action="#"
+        // Remove this block if you set a real action URL
+        e.preventDefault();
+        alert('Registration form validated. (Form action is "#": nothing will be sent.)');
+      });
+    }());
+  </script>
+</body>
+</html>
